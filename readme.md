@@ -1,5 +1,30 @@
-# metrics
+# Laravel Metrics
 This package helps you to manage your application metrics (e.g. Time, Count, Money)
+
+## Table of Contents
+- <a href="#installation">Installation</a>
+- <a href="#usage">Usage</a>
+    - <a href="#create-metrics">Create Metrics</a>
+    - <a href="#metrics-usage">Metrics usage</a>
+    - <a href="#start-metrics">Start Metrics</a>
+    - <a href="#stop-metrics">Stop Metrics</a>
+    - <a href="#once-metrics">Once Metrics</a>
+- <a href="#statistics">Statistics</a>
+    - <a href="#methods">Methods</a>
+        - <a href="#user">user()</a>
+        - <a href="#admin">admin()</a>
+        - <a href="#startat">startAt()</a>
+        - <a href="#endat">endAt()</a>
+        - <a href="#betweenat">betweenAt()</a>
+        - <a href="#period">period</a>
+        - <a href="#getbuilder">getBuilder()</a>
+    - <a href="#results">Results</a>
+        - <a href="#count">count()</a>
+        - <a href="#sum">sum()</a>
+        - <a href="#avg">avg()</a>
+        - <a href="#min">min()</a>
+        - <a href="#max">max()</a>
+
 
 ## Installation
 
@@ -69,7 +94,7 @@ class User extends Model
 }
 ```
 
-#### Start metrics
+### Start metrics
 To start Metrics:
 > In CountMetrics first parameter - `$user` (The user to which the metrics belongs, default `null`),
 > second parameter - `admin` (The user who called the metrics, default `null`),
@@ -88,7 +113,7 @@ $user = auth()->user();
 $news->startMetrics(new PageViewCountMetrics($user));
 ```
 
-#### Stop metrics
+### Stop metrics
 To stop Metrics:
 ```php
 // when user make some payment
@@ -103,14 +128,14 @@ $news->closeMetrics(new PageViewCountMetrics($user));
 auth()->logout();
 ```
 
-#### Once metrics
+### Once metrics
 To fire once Metrics:
 ```php
 $user = auth()->user();
 $user->onceMetrics(new SomeOnceMetrics());
 ```
 
-### Statistics
+## Statistics
 To get statistics you can use `MetricsStatistics` class
 
 Example:
@@ -119,9 +144,9 @@ Example:
 $stats = new MetricsStatistics(new FirstPaymentMetrics());
 ```
 
-#### Methods
+### Methods
 
-##### user(Collection|array|User $user)
+#### user
 Filter statistics by `$user` (user Model, array of users or Collection of users)
 > `$user` - The user to which the metrics belongs.
 ```php
@@ -135,11 +160,11 @@ $stats->user([auth()->user(), User:first()]);
 $stats->user(User::where('is_active', 1)->get());
 ```
 
-##### admin(Collection|array|User $user)
+#### admin
 Filter by **admin** like by **user**
 > `admin` - The user who called the metrics.
 
-##### startAt(Carbon $start_at)
+#### startAt
 Filter from `$start_at` date
 > The metrics stats calculating by `end_at` field (when metrics stops)
 ```php
@@ -147,7 +172,7 @@ $start_at = Carbon::now()->startOfMonth();
 $stats->startAt($start_at);
 ```
 
-##### endAt(Carbon $end_at)
+#### endAt
 Filter to `$end_at` date
 > The metrics stats calculating by `end_at` field (when metrics stops)
 ```php
@@ -155,7 +180,7 @@ $end_at = Carbon::now()->endOfMonth();
 $stats->endAt($end_at);
 ```
 
-##### betweenAt(Carbon $start_at, Carbon $end_at)
+#### betweenAt
 Filter from `$start_at` to `$end_at` date
 > The metrics stats calculating by `end_at` field (when metrics stops)
 ```php
@@ -164,10 +189,14 @@ $end_at = Carbon::now()->endOfMonth();
 $stats->betweenAt($start_at, $end_at);
 ```
 
-##### hourly()
-Calculating statistics hourly
+#### period
+Calculating statistics grouped by periods
 ```php
 $stats->hourly();
+$stats->daily();
+$stats->weekly();
+$stats->monthly();
+$stats->yearly();
 
 // result example
 $stats->hourly()->count()->toArray();
@@ -194,42 +223,35 @@ $stats->hourly()->count()->toArray();
 // ]
 ```
 
-##### daily()
-like **hourly**
-
-##### weekly()
-like **hourly**
-
-##### monthly()
-like **hourly**
-
-##### yearly()
-like **hourly**
-
-##### getBuilder()
+#### getBuilder
 return Builder to your custom calculating
 
-##### count()
+### Results
+to get results
+
+#### count
 return **Count** of all filtered Metrics in DB
 > return Collection of Metrics
 
-##### sum()
+#### sum
 return **Sum** of all filtered Metrics in DB
 > if this is TimeMetrics - total seconds for metrics
 
-##### avg()
+#### avg
 return **Average** of all filtered Metrics in DB
 > if this is TimeMetrics - average seconds for metrics
 
-##### min()
+#### min
 return **Min** of all filtered Metrics in DB
 > if this is TimeMetrics - min seconds for metrics
 
-##### max()
+#### max
 return **Max** of all filtered Metrics in DB
 > if this is TimeMetrics - max seconds for metrics
 
-Example:
+
+
+### Example:
 ```php
 // to get total payments
 $stats = new MetricsStatistics(new FirstPaymentMetrics());
