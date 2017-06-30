@@ -187,7 +187,7 @@ class MetricsStatistics
     {
         if (!$user) return $this;
 
-        if (is_array($user)) {
+        if (is_array($user) || $user instanceof \Illuminate\Support\Collection) {
             $user_ids = [];
             foreach ($user as $item) {
                 $this->metrics->checkUserInstance($item);
