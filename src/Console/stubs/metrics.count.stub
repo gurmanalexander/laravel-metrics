@@ -1,0 +1,8 @@
+<?php namespace DummyNamespace;
+
+use GurmanAlexander\Metrics\Types\CountMetrics;
+
+class DummyClass extends CountMetrics
+{
+
+}

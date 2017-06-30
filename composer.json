@@ -1,0 +1,29 @@
+{
+  "name": "gurmanalexander/laravel-metrics",
+  "description": "Managable metrics",
+  "keywords": ["laravel", "metrics", "statistics", "stats"],
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Alexander Gurman",
+      "email": "gurmanalexander@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "GurmanAlexander\\Metrics\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "GurmanAlexander\\Metrics\\MetricsServiceProvider"
+      ]
+    }
+  }
+}

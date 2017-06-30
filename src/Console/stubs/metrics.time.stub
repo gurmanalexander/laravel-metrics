@@ -1,0 +1,8 @@
+<?php namespace DummyNamespace;
+
+use GurmanAlexander\Metrics\Types\TimeMetrics;
+
+class DummyClass extends TimeMetrics
+{
+
+}
