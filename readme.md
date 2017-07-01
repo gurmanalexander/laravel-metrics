@@ -31,7 +31,7 @@ This package helps you to manage your application metrics (e.g. Time, Count, Mon
 Require this package with composer:
 
 ```shell
-composer require gurmanalexander/laravel-metrics
+composer require gurmanalexander/laravel-metrics:1.*
 ```
 
 After updating composer, add the ServiceProvider to the providers array in config/app.php
