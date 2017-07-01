@@ -22,7 +22,7 @@ trait Metricable
      */
     public function onceMetrics(Metrics $metrics)
     {
-        return $metrics->onceMetrics($metrics);
+        return $metrics->onceMetrics($this);
     }
 
     /**
