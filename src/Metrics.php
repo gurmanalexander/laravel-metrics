@@ -15,8 +15,6 @@ abstract class Metrics extends Model
 
     protected $table = 'metrics';
 
-    public $timestamps = false;
-
     protected $fillable = [
         'count',
         'data',
