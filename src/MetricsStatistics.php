@@ -60,7 +60,7 @@ class MetricsStatistics
     {
         if ($end_at) $this->endAt = $end_at;
 
-        $this->metrics->where('end_at', '>=', $this->endAt);
+        $this->metrics->where('end_at', '<=', $this->endAt);
 
         return $this;
     }
